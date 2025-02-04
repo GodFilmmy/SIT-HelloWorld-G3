@@ -6,7 +6,7 @@ const email = " servicedesk@sit.kmutt.ac.th";
 
 function Footer(){
     return(
-        <div className="footer-content  m-6">
+        <div className="footer-content  m-6 text-[#7B7B7B]">
             <div className="footer-line h-[2px] bg-[#989898] my-1"></div>
             <div className="footer-container flex p-10 gap-10 ">
                 <div className="footer-left basis-1/3">
@@ -18,13 +18,19 @@ function Footer(){
                             <li className="flex items-center gap-2"><FaPhoneAlt /> +662 470 9850</li>
                             <li className="flex items-center gap-2"><FaLocationDot /> 126 ถนนประชาอุทิศ แขวงบางมด เขตทุ่งครุ กรุงเทพฯ 10140</li>
                             <li>webadmin@sit.kmutt.ac.th</li>
-                            <li>@sit.kmutt</li>
+                            <li className="flex items-center gap-2"><img width="24px" src="\Footer-img\line contact.png"/>@sit.kmutt</li>
                         </ul>
                     </div>
                     <div className="footer-left-social">
+<<<<<<< Updated upstream
                         <div className="f-faceBook">Test</div>
                         <div className="f-IG"></div>
                         <div className="f-Youtube"></div>
+=======
+                        <div className="f-faceBook"><a><img src="Footer-img\facebook contact.png"/></a></div>
+                        <div className="f-IG"><a><img src="Footer-img\Instagram_icon.png.webp"/></a></div>
+                        <div className="f-Youtube"><a><img src=""/></a></div>
+>>>>>>> Stashed changes
                     </div>
                 </div>
                 <div className="footer-right flex basis-2/3 gap-5">
