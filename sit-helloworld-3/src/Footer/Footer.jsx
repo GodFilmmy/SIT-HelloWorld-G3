@@ -22,19 +22,9 @@ function Footer(){
                         </ul>
                     </div>
                     <div className="footer-left-social">
-<<<<<<< Updated upstream
-
-
                         <div className="f-faceBook"><a><img src="Footer-img\facebook contact.png"/></a></div>
                         <div className="f-IG"><a><img src="Footer-img\Instagram_icon.png.webp"/></a></div>
                         <div className="f-Youtube"><a><img src=""/></a></div>
-
-
-=======
-                        <div className="f-faceBook"><a><img src="Footer-img\facebook contact.png"/></a></div>
-                        <div className="f-IG"><a><img src="Footer-img\Instagram_icon.png.webp"/></a></div>
-                        <div className="f-Youtube"><a><img src=""/></a></div>
->>>>>>> Stashed changes
                     </div>
                 </div>
                 <div className="footer-right flex basis-2/3 gap-5">
