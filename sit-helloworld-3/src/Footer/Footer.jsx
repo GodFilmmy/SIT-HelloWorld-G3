@@ -1,19 +1,33 @@
-
-
-const tel = "0 2470 9820";
-const email = "servicedesk@sit.kmutt.ac.th";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { CiMail } from "react-icons/ci";
+const tel = " 0 2470 9820";
+const email = " servicedesk@sit.kmutt.ac.th";
 
 function Footer(){
     return(
-        <div className="footer-content border-1 m-6">
-            <div className="footer-line"></div>
-            <div className="footer-container flex gap-4">
-                <div className="footer-left">
+        <div className="footer-content  m-6">
+            <div className="footer-line h-[2px] bg-[#989898] my-1"></div>
+            <div className="footer-container flex p-10 gap-10 ">
+                <div className="footer-left basis-1/3">
                     <div className="footer-left-logo">
-                        <img src="\Footer-img\SitLogo-footer.png"/>
+                        <img className="w-sm" src="\Footer-img\SitLogo-footer.png"/>
+                    </div>
+                    <div className="footer-left-con m-4">
+                        <ul>
+                            <li className="flex items-center gap-2"><FaPhoneAlt /> +662 470 9850</li>
+                            <li className="flex items-center gap-2"><FaLocationDot /> 126 ถนนประชาอุทิศ แขวงบางมด เขตทุ่งครุ กรุงเทพฯ 10140</li>
+                            <li>webadmin@sit.kmutt.ac.th</li>
+                            <li>@sit.kmutt</li>
+                        </ul>
+                    </div>
+                    <div className="footer-left-social">
+                        <div className="f-faceBook"></div>
+                        <div className="f-IG"></div>
+                        <div className="f-Youtube"></div>
                     </div>
                 </div>
-                <div className="footer-right">
+                <div className="footer-right flex basis-2/3 gap-5">
                     <div className="footer-Thai">
                         <div className="footer-Thai-p">เพื่อให้ฝ่าย Infrastructure สามารถให้บริการการใช้ห้องได้อย่างมีประสิทธิภาพ ขอความกรุณาให้ผู้จองห้อง 
                             ทำการจองล่วงหน้า อย่างน้อย 24 ชม. 
@@ -21,10 +35,13 @@ function Footer(){
                             ทั้งนี้หากเวลาที่ทำการจองห้องหรือใช้ห้องไม่ได้อยู่ในช่วงเวลาทำงานปรกติ
                             ทางฝ่าย Infrastructure อาจไม่สามารถให้บริการได้
                             </div>
-                        <div className="footer-Thai-con">
-                            {tel}
-                            <br></br>
-                            {email}
+                        <div className="footer-Thai-con ">
+                            <div className="footer-thai-tel flex items-center gap-2">
+                            <FaPhoneAlt />{tel}
+                            </div>
+                            <div className="footer-thai-tel flex items-center gap-2">
+                                <CiMail />{email}
+                            </div>
                         </div>
                     </div>
                     <div className="footer-Eng">
@@ -33,9 +50,12 @@ function Footer(){
                     Please note that if your request or reservation is outside the normal service hours, our staff may not be able to provide the service at the requested time.
                     </div>
                         <div className="footer-Eng-con">
-                            {tel}
-                            <br></br>
-                            {email}
+                        <div className="footer-eng-tel flex items-center gap-2">
+                            <FaPhoneAlt />{tel}
+                            </div>
+                            <div className="footer-eng-tel flex items-center gap-2">
+                                <CiMail />{email}
+                            </div>
                         </div>
                     </div>
                 </div>
