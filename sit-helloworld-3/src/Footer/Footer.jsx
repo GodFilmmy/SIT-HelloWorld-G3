@@ -22,7 +22,7 @@ function Footer(){
                         </ul>
                     </div>
                     <div className="footer-left-social">
-                        <div className="f-faceBook"></div>
+                        <div className="f-faceBook">Test</div>
                         <div className="f-IG"></div>
                         <div className="f-Youtube"></div>
                     </div>
