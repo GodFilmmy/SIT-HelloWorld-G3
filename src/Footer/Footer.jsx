@@ -14,7 +14,7 @@ function Footer() {
           <div className="footer-left-logo">
             <img
               className="w-sm"
-              src="\Footer-img\SitLogo-footer.png"
+              src="/Footer-img/SitLogo-footer.png"
               alt="Sit Logo"
             />
           </div>
@@ -31,7 +31,7 @@ function Footer() {
               <li className="flex items-center gap-2 mt-3">
                 <img
                   width="28px"
-                  src="\Footer-img\line contact.png"
+                  src="/Footer-img/line contact.png"
                   alt="Line contact"
                 />
                 @sit.kmutt
