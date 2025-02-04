@@ -36,9 +36,12 @@ function Footer(){
                             ทางฝ่าย Infrastructure อาจไม่สามารถให้บริการได้
                             </div>
                         <div className="footer-Thai-con ">
-                        <FaPhoneAlt />{tel}
-                            <br></br>
-                        <CiMail />{email}
+                            <div className="footer-thai-tel flex items-center gap-2">
+                            <FaPhoneAlt />{tel}
+                            </div>
+                            <div className="footer-thai-tel flex items-center gap-2">
+                                <CiMail />{email}
+                            </div>
                         </div>
                     </div>
                     <div className="footer-Eng">
@@ -47,9 +50,12 @@ function Footer(){
                     Please note that if your request or reservation is outside the normal service hours, our staff may not be able to provide the service at the requested time.
                     </div>
                         <div className="footer-Eng-con">
-                        <FaPhoneAlt />{tel}
-                            <br></br>
-                        <CiMail /> {email}
+                        <div className="footer-eng-tel flex items-center gap-2">
+                            <FaPhoneAlt />{tel}
+                            </div>
+                            <div className="footer-eng-tel flex items-center gap-2">
+                                <CiMail />{email}
+                            </div>
                         </div>
                     </div>
                 </div>
