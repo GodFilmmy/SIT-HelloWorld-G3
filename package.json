@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "react-router-dom": "^7.1.5"
+  },
+  "dependencies": {
+    "antd": "^5.23.3",
+    "dayjs": "^1.11.13"
   }
 }
