@@ -1,22 +1,53 @@
+const rooms = {
+  room1: {
+    building: "LX",
+    floor: "(10th floor)",
+    roomName: "Training room 10/1",
+  },
+  room2: {
+    building: "LX",
+    floor: "(10th floor)",
+    roomName: "Training room 10/2",
+  },
+  room3: {
+    building: "LX",
+    floor: "(10th floor)",
+    roomName: "Training room 10/3",
+  },
+  room4: {
+    building: "LX",
+    floor: "(10th floor)",
+    roomName: "Training room 10/2",
+  },
+  room5: {
+    building: "LX",
+    floor: "(10th floor)",
+    roomName: "Training room 10/2",
+  },
+};
+
 function HomePage() {
   return (
     <>
-      <div className="home-container flex items-center flex-col lg:flex-row gap-10 ">
+      <div className="home-container flex flex-col lg:flex-row p-10 justify-center gap-8 items-center">
         <div className="home-left">
-          <div className="home-left-upcom"></div>
-          <img src="Home-img/home-background.png" />
+          <div className="home-left-upcom "></div>
+          <img
+            className="relative left-[-60px] lg:left-[-150px]"
+            src="Home-img/home-background.png"
+          />
         </div>
-        <div className="home-content flex flex-col lg:basis-1/3">
-          <div className="home-logo">
-            <img src="Home-img/home-sitLogo.png" width="400px" />
+        <div className="home-content flex flex-col gap-6">
+          <div className="home-title">
+            <div className="text-6xl font-bold">ระบบจองห้อง <br></br> คณะเทคโนโลยีสารสนเทศ</div>
           </div>
-          <div className="home-room-dropdown">
+          <div className="home-room-dropdown ">
             <select
               name="floor"
-              className="p-2 rounded-[10px] border border-[#6DA0FE] shadow-md focus:outline-none focus:ring-2 focus:ring-[#6DA0FE]"
+              className="w-[50%] p-3 border border-[#6DA0FE] rounded-lg"
             >
+              <option value="">--choose your floor--</option>
               <optgroup label="Lx Building">
-                <option value="">--choose your floor--</option>
                 <option value="LxBuilding">10th</option>
                 <option value="LxBuilding">11th</option>
                 <option value="LxBuilding">12th</option>
@@ -28,8 +59,25 @@ function HomePage() {
               </optgroup>
             </select>
           </div>
-          <div className="home-room-choosing bg-amber-200 h-[407px] w-full"></div>
-          <div className="home-room-calen h-[236px] bg-amber-700"></div>
+          <div className="home-room-choosing-container h-100 overflow-hidden w-ful rounded-lg">
+            <div className="home-room-choosing-body overflow-y-auto h-full">
+              {Object.keys(rooms).map((roomKey) => (
+                <div
+                  key={roomKey}
+                  className="home-room-choosing-box p-4 mb-2 border border-gray-300 rounded-lg"
+                >
+                  <div className="home-room-building">
+                    {rooms[roomKey].building}
+                  </div>
+                  <div className="home-room-floor">{rooms[roomKey].floor}</div>
+                  <div className="home-room-floor">
+                    {rooms[roomKey].roomName}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="home-room-calen h-[236px] bg-amber-400"></div>
         </div>
       </div>
     </>
