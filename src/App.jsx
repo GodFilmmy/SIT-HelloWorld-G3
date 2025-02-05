@@ -7,7 +7,7 @@ import TopNavBar from "./NavBar/Nav";
 function App() {
   return (
     <>
-    <TopNavBar/>
+      <TopNavBar></TopNavBar>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
