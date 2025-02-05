@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const rooms = {
   room1: {
     building: "LX",
@@ -27,6 +29,12 @@ const rooms = {
 };
 
 function HomePage() {
+  const homeNavigate = useNavigate();
+  const handleRoomBoxSelected = () => {
+    homeNavigate("/form");
+    window.scrollTo({top:0});
+  };
+
   return (
     <>
       <div className="home-container flex flex-col lg:flex-row pt-[130px] p-10 justify-center gap-8 items-center">
@@ -65,7 +73,7 @@ function HomePage() {
             <div className="home-room-choosing-body overflow-y-auto h-full">
               {Object.keys(rooms).map((roomKey) => (
                 <div
-                  onClick={() => alert("Hello")}
+                  onClick={handleRoomBoxSelected}
                   key={roomKey}
                   className="home-room-choosing-box p-4 mb-2 border border-gray-300 rounded-lg hover:border-2"
                 >
