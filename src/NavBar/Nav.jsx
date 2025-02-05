@@ -7,6 +7,7 @@ function TopNavBar() {
   const navigate = useNavigate();
   const handleGoHome = () => {
   navigate("/");
+  window.scrollTo({top:0});
   }
   return (
     <div className="top-nav bg-[#f1f1f1] w-full fixed h-[88px] z-30 top-0 left-0 flex items-center justify-between px-6 gap-7">
