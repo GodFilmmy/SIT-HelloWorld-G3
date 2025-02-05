@@ -29,7 +29,7 @@ const rooms = {
 function HomePage() {
   return (
     <>
-      <div className="home-container flex flex-col lg:flex-row p-10 justify-center gap-8 items-center">
+      <div className="home-container flex flex-col lg:flex-row pt-[130px] p-10 justify-center gap-8 items-center">
         <div className="home-left">
           <div className="home-left-upcom "></div>
           <img
@@ -39,7 +39,9 @@ function HomePage() {
         </div>
         <div className="home-content flex flex-col gap-6">
           <div className="home-title">
-            <div className="text-6xl font-bold">ระบบจองห้อง <br></br> คณะเทคโนโลยีสารสนเทศ</div>
+            <div className="text-6xl font-bold">
+              ระบบจองห้อง <br></br> คณะเทคโนโลยีสารสนเทศ
+            </div>
           </div>
           <div className="home-room-dropdown ">
             <select
@@ -63,8 +65,9 @@ function HomePage() {
             <div className="home-room-choosing-body overflow-y-auto h-full">
               {Object.keys(rooms).map((roomKey) => (
                 <div
+                  onClick={() => alert("Hello")}
                   key={roomKey}
-                  className="home-room-choosing-box p-4 mb-2 border border-gray-300 rounded-lg"
+                  className="home-room-choosing-box p-4 mb-2 border border-gray-300 rounded-lg hover:border-2"
                 >
                   <div className="home-room-building">
                     {rooms[roomKey].building}
