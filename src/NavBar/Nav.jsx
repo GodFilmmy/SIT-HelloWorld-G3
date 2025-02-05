@@ -19,7 +19,7 @@ function TopNavBar() {
           <input
             type="text"
             className="p-2 border rounded w-full bg-white"
-            placeholder="Search..."
+            placeholder="Search...."
           />
         </div>
       </div>
