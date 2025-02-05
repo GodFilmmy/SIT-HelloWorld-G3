@@ -4,11 +4,12 @@ import ReservationForm from "./ReservationForm/ReservationForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import TopNavBar from "./NavBar/Nav";
+
 function App() {
   return (
     <>
-      <TopNavBar></TopNavBar>
       <BrowserRouter>
+        <TopNavBar></TopNavBar>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/form" element={<ReservationForm />} />

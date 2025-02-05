@@ -26,12 +26,14 @@ const rooms = {
   },
 };
 
+import ReservationBtn from "../Reservation-Btn";
 function HomePage() {
   return (
     <>
       <div className="home-container flex flex-col lg:flex-row pt-[130px] p-10 justify-center gap-8 items-center">
         <div className="home-left">
-          <div className="home-left-upcom "></div>
+          <div className="home-left-upcom ">
+          </div>
           <img
             className="relative left-[-60px] lg:left-[-150px]"
             src="Home-img/home-background.png"
