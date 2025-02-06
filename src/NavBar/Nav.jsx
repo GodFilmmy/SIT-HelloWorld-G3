@@ -52,9 +52,8 @@ function TopNavBar() {
         <div className="lg:hidden"> 
           <button
             onClick={handleGoToForm}
-            className="p-3 border rounded text-xl bg-white hover:border-2"
-          >
-            <FaRegCalendarAlt />
+            className="p-3 border rounded text-xl bg-white hover:border-2">
+              <FaRegCalendarAlt />
           </button>
         </div>
       </div>
