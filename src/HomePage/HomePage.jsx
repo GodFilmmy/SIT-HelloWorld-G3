@@ -5,26 +5,31 @@ const rooms = {
     building: "LX",
     floor: "(10th floor)",
     roomName: "Training room 10/1",
+    roomPic: "Home-img/home-room-selectpic.png",
   },
   room2: {
     building: "LX",
     floor: "(10th floor)",
     roomName: "Training room 10/2",
+    roomPic: "Home-img/home-room-selectpic.png",
   },
   room3: {
     building: "LX",
     floor: "(10th floor)",
     roomName: "Training room 10/3",
+    roomPic: "Home-img/home-room-selectpic.png",
   },
   room4: {
     building: "LX",
     floor: "(10th floor)",
     roomName: "Training room 10/2",
+    roomPic: "Home-img/home-room-selectpic.png",
   },
   room5: {
     building: "LX",
     floor: "(10th floor)",
     roomName: "Training room 10/2",
+    roomPic: "Home-img/home-room-selectpic.png",
   },
 };
 
@@ -32,7 +37,7 @@ function HomePage() {
   const homeNavigate = useNavigate();
   const handleRoomBoxSelected = () => {
     homeNavigate("/form");
-    window.scrollTo({top:0});
+    window.scrollTo({ top: 0 });
   };
 
   return (
@@ -75,14 +80,23 @@ function HomePage() {
                 <div
                   onClick={handleRoomBoxSelected}
                   key={roomKey}
-                  className="home-room-choosing-box p-4 mb-2 border border-gray-300 rounded-lg hover:border-2"
+                  className="home-room-choosing-box flex gap-4 text-2xl p-8 mb-2 border border-gray-300 rounded-lg hover:border-2"
                 >
-                  <div className="home-room-building">
-                    {rooms[roomKey].building}
+                  <div className="hoom-room-choosing-box-left">
+                    <div className="home-room-building">
+                      <img src={rooms[roomKey].roomPic} />
+                    </div>
                   </div>
-                  <div className="home-room-floor">{rooms[roomKey].floor}</div>
-                  <div className="home-room-floor">
-                    {rooms[roomKey].roomName}
+                  <div className="hoom-room-choosing-box-right">
+                    <div className="home-room-building font-bold">
+                      {rooms[roomKey].building}
+                    </div>
+                    <div className="home-room-floor">
+                      {rooms[roomKey].floor}
+                    </div>
+                    <div className="home-room-floor">
+                      {rooms[roomKey].roomName}
+                    </div>
                   </div>
                 </div>
               ))}
