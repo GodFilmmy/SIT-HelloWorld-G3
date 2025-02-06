@@ -1,16 +1,24 @@
-import { SlArrowLeft } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import ReservationBtn from "../Reservation-Btn";
+
 function TopNavBar() {
   const navigate = useNavigate();
+
   const handleGoHome = () => {
-  navigate("/");
-  window.scrollTo({top:0});
-  }
+    navigate("/");
+    window.scrollTo({ top: 0 });
+  };
+
+  const handleGoToForm = () => {
+    navigate("/form");
+    window.scrollTo({ top: 0 });
+  };
+
   return (
-    <div className="top-nav bg-[#f1f1f1] w-full fixed h-[88px] z-30 top-0 left-0 flex items-center justify-between px-6 gap-7">
+    <div className="top-nav bg-[#f1f1f1] w-full fixed h-[88px] z-30 top-0 left-0 flex items-center justify-between px-6 lg:gap-7">
       <div className="nav-left flex items-center basis-1/3">
         <div className="nav-sitIcon">
           <img src="SitLogo.png" className="w-[391px]" alt="Site Logo" />
@@ -29,12 +37,24 @@ function TopNavBar() {
           />
         </div>
         <div>
-          <button onClick={handleGoHome} className="bg-white p-3 border rounded text-xl hover:border-2">
+          <button
+            onClick={handleGoHome}
+            className="bg-white p-3 border rounded text-xl hover:border-2"
+          >
             <FaHome />
           </button>
         </div>
-        <div>
-          <ReservationBtn/>
+
+        <div className="hidden lg:block"> 
+          <ReservationBtn />
+        </div>
+
+        <div className="lg:hidden"> 
+          <button
+            onClick={handleGoToForm}
+            className="p-3 border rounded text-xl bg-white hover:border-2">
+              <FaRegCalendarAlt />
+          </button>
         </div>
       </div>
     </div>
