@@ -4,7 +4,7 @@ import ReservationForm from "./ReservationForm/ReservationForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import TopNavBar from "./NavBar/Nav";
-
+import ScheduleResult from "./SchedulePage/Schedulepage";
 function App() {
   return (
     <>
@@ -13,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/form" element={<ReservationForm />} />
+          <Route path="/schdule" element={<ScheduleResult />} />
         </Routes>
       </BrowserRouter>
       <Footer />
