@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
-
+import Calendar from "react-calendar";
+import { useState } from "react";
+import "react-calendar/dist/Calendar.css";
 const rooms = {
   room1: {
     building: "LX",
@@ -40,6 +42,7 @@ function HomePage() {
     window.scrollTo({ top: 0 });
   };
 
+  const [value, setValue] = useState(new Date());
   return (
     <>
       <div className="home-container flex flex-col lg:flex-row pt-[130px] p-10 justify-center gap-8 items-center">
@@ -53,7 +56,7 @@ function HomePage() {
         <div className="home-content flex flex-col gap-6">
           <div className="home-title">
             <div className="text-6xl font-bold">
-              ระบบจองห้อง <br></br> คณะเทคโนโลยีสารสนเทศ
+              ระบบจองห้อง <br></br>คณะเทคโนโลยีสารสนเทศ
             </div>
           </div>
           <div className="home-room-dropdown ">
@@ -102,7 +105,9 @@ function HomePage() {
               ))}
             </div>
           </div>
-          <div className="home-room-calen h-[236px] bg-amber-400"></div>
+          <div className="home-room-calen items-center flex justify-center mt-4">
+            <Calendar onChange={setValue} value={value}/>
+          </div>
         </div>
       </div>
     </>
