@@ -1,160 +1,95 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
+import React, { useEffect, useState } from 'react';
+// import TextStatusInput from './TextStatusInput';
+import { useReversation } from '../contexts/useReversation'
+import ReservationDetails from './ReservationDetails';
+import AdditionalDetails from './AdditionalDetails';
+import SubmitButton from './Button/SubmitButton';
+import ResetButton from './Button/ResetButton';
+import CalendarFrom from './CalendarForm';
+import TextStatusInput from './TextStatusInput';
+import DateTimeInput from './DateTImeInput';
+// import RecurringBooking from './RecurringBooking';
 
 const ReservationForm = () => {
-  const [fromData, setFormData] = useState({
-    name: "",
-    status: "",
-    date: "",
-    startTime: "",
-    endTime: "",
-    details: "",
-    floor: "",
-    room: "",
-    endDate: "",
-  });
+    const [formData, setFormData] = useState({
+        name: "",
+        status: "",
+        floor: "",
+        room: "",
+        date: "",
+        startTime: "",
+        endTime: "",
+        details: "",
+    });
+    const { form, setForm } = useReversation()
+    // const handleSummit = () => {
+    //     event.preventDefault();
+    //     setForm(formData)
+    //     console.log("✅ Form Submitted:", formData);
+    // }
+    // useEffect(() => {
+    //     console.log("📌 From Data Update: ", formData);
+    // }, [fromData]);
 
-  useEffect(() => {
-    console.log(fromData);
-  }, [fromData]);
+    // const onEndDateChangeHandler = (event) => {
+    //     setForm((prev) => ({ ...prev, endDate: event.target.value }))
+    // }
+    const onDetailsChangeHandler = (event) => {
+        setForm((prev) => ({ ...prev, details: event.target.value }))
+    }
 
-  const room = [
-    "CB2301",
-    "CB2304",
-    "CB2305",
-    "CB2306",
-    "CB2308",
-    "CB2312",
-    "CB2313",
-  ];
+    return (
+        <>
 
-  return (
-    <div
-      className="flex flex-col justify-center items-center bg-cover bg-no-repeat"
-      style={{
-        backgroundImage: `url("/background.jpg")`,
-      }}
-    >
-      <div className=" max-w-2xl mx-auto rounded-lg bg-white px-16 py-15">
-        <h1 className="text-2xl font-blod mb-6">รายละเอียดการจอง</h1>
+            <div className="flex flex-col justify-center bg-[url(/background.jpg)] items-center bg-center bg-cover bg-no-repeat p-5">
+                {/* <div className="max-w-[1200px] w-full h-full mx-auto rounded-lg bg-white px-16 py-15 bg-center "> */}
+                {/* <div className='bg-white p-6 rounded-lg shadow-lg w-[1127px] max-w-4xl'> */}
+                <div className='bg-white bg-opacity-90 backdrop-blur-md p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto mt-10 '>
+                    <div className="flex flex-col gap-2">
+                        <h1 className='text-2xl py-3 px-5 bg-gray-900 text-white text-center font-bold uppercase'>
+                            Room Booking
+                        </h1>
+                    </div>
+                    <TextStatusInput />
 
-        <div className="mb-4">
-          <label className="block text-gray-700">สถานะ: </label>
-          <select
-            onChange={(event) =>
-              setFormData({ ...fromData, status: event.target.value })
-            }
-            name="status"
-            className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-          >
-            <option value="">--Choose your role--</option>
-            <option value="Students">Students</option>
-            <option value="Staff">Staff</option>
-            <option value="Lecturer">Lecturer</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">วันที่จอง: </label>
-          <input
-            type="date"
-            name="date"
-            className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">เวลา: </label>
-          <input
-            type="time"
-            name="startTime"
-            className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-          />
-          <span className="mx-2"> ถึง </span>
-          <input
-            type="time"
-            name="endTime"
-            className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-          />
-        </div>
+                    <AdditionalDetails />
 
-        <div className="mb-4">
-          <label className="block text-gray-700">รายละเอียด:</label>
-          <textarea name="details" id="" cols="30" rows="10"></textarea>
-        </div>
-        <div className="inline-block relative w-64">
-          <label className="block text-gray-700">ชั้น: </label>
-          <select
-            name="floor"
-            className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-          >
-            <optgroup label="Lx Building">
-              <option value="">--choose your floor--</option>
-              <option value="LxBuilding" disabled>
-                10th
-              </option>
-              <option value="LxBuilding">11th</option>
-              <option value="LxBuilding">12th</option>
-            </optgroup>
-            <optgroup label="SIT Building">
-              <option value="SITBuilding">1st</option>
-              <option value="SITBuilding">3rd</option>
-              <option value="SITBuilding">4th</option>
-            </optgroup>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">ห้อง: </label>
-          <select
-            name="room"
-            className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-          >
-            <option value="">--choose your room--</option>
-            {room.map((value) => {
-              return (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">สิ้นสุดวันที่: </label>
-          <input
-            type="date"
-            name="endDate"
-            className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-          />
-        </div>
-        <div className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"'>
-          <Button
-            type="summit"
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            บันทึก
-          </Button>
-          <Button
-            type="reset"
-            onClick={() =>
-              setFormData({
-                name: "",
-                status: "",
-                date: "",
-                startTime: "",
-                endTime: "",
-                details: "",
-                floor: "",
-                room: "",
-                endDate: "",
-              })
-            }
-          >
-            ยกเลิก
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
-export default ReservationForm;
+                {/* <div className="z - 5 bg-black opacity-40 w-[200px] h-[200px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white ${modal ? ' block' : ' hidden'}">
+                    <div>
+                        สำเร็จ!
+                    </div>
+                </div> */}
+
+                {/* <div className='flex ml-auto gap-10 justify-between'> */}
+                <div className='grid grid-cols-2 mt-4 items-center justify-center pb-1'>
+                    <div className='flex items-center justify-center'>
+                        <CalendarFrom />
+                    </div>
+                    <div className=" flex flex-row">
+                        <div className='mb-4 flex-1 '>
+                            <DateTimeInput />
+                            <label htmlFor="details-input" className='block text-gray-700'>
+                                Details:
+                            </label>
+                            <textarea
+                                name="details-input"
+                                value={form.details}
+                                onChange={onDetailsChangeHandler}
+                                className="w-full p-19 border border-gray-300 rounded-lg shadow-md text-[#6B7280]"
+                            ></textarea>
+                        </div>
+                    </div >
+                </div>
+
+                <div className='flex flex-row-reverse gap-6 '>
+                    <SubmitButton />
+                    <ResetButton />
+                </div>
+            </div>
+        </div >
+        </>
+
+    )
+
+}
+export default ReservationForm
