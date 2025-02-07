@@ -105,7 +105,7 @@ function HomePage() {
               ))}
             </div>
           </div>
-          <div className="home-room-calen items-center flex justify-center">
+          <div className="home-room-calen items-center flex justify-center mt-4">
             <Calendar onChange={setValue} value={value}/>
           </div>
         </div>
