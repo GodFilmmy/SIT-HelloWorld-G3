@@ -56,7 +56,7 @@ function HomePage() {
         <div className="home-content flex flex-col gap-6">
           <div className="home-title">
             <div className="text-6xl font-bold">
-              ระบบจองห้อง <br></br> คณะเทคโนโลยีสารสนเทศ
+              ระบบจองห้อง <br></br>คณะเทคโนโลยีสารสนเทศ
             </div>
           </div>
           <div className="home-room-dropdown ">
