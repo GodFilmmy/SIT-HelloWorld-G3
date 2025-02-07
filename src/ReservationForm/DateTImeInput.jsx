@@ -5,10 +5,6 @@ const DateTimeInput = ({ onChange }) => {
     const [] = useState({date: "", startTime: "", endTime: "" })
     const { setForm, form } = useReversation()
 
-    const onDateChangeHandler = (event) => {
-        setForm((prev) => ({...prev, date: event.target.value }))
-    }
-
     const onStartTimeChangeHander = (event) => {
         setForm((prev) => ({ ...prev, startTime: event.target.value }))
     }
@@ -22,19 +18,7 @@ const DateTimeInput = ({ onChange }) => {
     // }, [fromData])
 
     return (
-        <div className="flex flex-row gap-2">
-            <div className="mb-4 flex-1">
-                <label htmlFor="input-date" className="block text-gray-700">
-                    Date:
-                </label>
-                <input 
-                type="date"
-                name="input-date"
-                value={form.date}
-                onChange={onDateChangeHandler}
-                className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-                 />
-            </div>
+        <div className="flex flex-row gap-2 items-center">
             <div className="mb-4 flex-1">
                 <label htmlFor="input-start-time" className="block text-gray-700">
                     Start Time:
@@ -44,7 +28,7 @@ const DateTimeInput = ({ onChange }) => {
                 name="input-start-time"
                 value={form.startTime}
                 onChange={onStartTimeChangeHander}
-                className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-300 font-medium text-base"
                  />
             </div>
             <div className="mb-4 flex-1">
@@ -56,7 +40,7 @@ const DateTimeInput = ({ onChange }) => {
                 name="input-end-time" 
                 value={form.endTime}
                 onChange={onEndTimeChangeHander}
-                className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-300 font-medium text-base"
                 />
             </div>
         </div>

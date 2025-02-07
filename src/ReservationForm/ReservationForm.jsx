@@ -5,21 +5,21 @@ import ReservationDetails from './ReservationDetails';
 import AdditionalDetails from './AdditionalDetails';
 import SubmitButton from './Button/SubmitButton';
 import ResetButton from './Button/ResetButton';
-import RecurringBooking from './RecurringBooking';
+import CalendarFrom from './CalendarForm';
+import TextStatusInput from './TextStatusInput';
+import DateTimeInput from './DateTImeInput';
+// import RecurringBooking from './RecurringBooking';
 
 const ReservationForm = () => {
     const [formData, setFormData] = useState({
         name: "",
         status: "",
+        floor: "",
+        room: "",
         date: "",
         startTime: "",
         endTime: "",
         details: "",
-        floor: "",
-        room: "",
-        recurring: false,
-        recurringType: "",
-        endDate: ""
     });
     const { form, setForm } = useReversation()
     // const handleSummit = () => {
@@ -31,62 +31,62 @@ const ReservationForm = () => {
     //     console.log("📌 From Data Update: ", formData);
     // }, [fromData]);
 
-    const onEndDateChangeHandler = (event) => {
-        setForm((prev) => ({ ...prev, endDate: event.target.value }))
-    }
+    // const onEndDateChangeHandler = (event) => {
+    //     setForm((prev) => ({ ...prev, endDate: event.target.value }))
+    // }
     const onDetailsChangeHandler = (event) => {
         setForm((prev) => ({ ...prev, details: event.target.value }))
     }
 
     return (
         <>
-            <div className="flex flex-col justify-center bg-[url(/background.jpg)] items-center bg-center bg-cover bg-no-repeat">
-                <div className="max-w-[1200px] w-full h-full mx-auto rounded-lg bg-white px-16 py-15 bg-center ">
+
+            <div className="flex flex-col justify-center bg-[url(/background.jpg)] items-center bg-center bg-cover bg-no-repeat p-5">
+                {/* <div className="max-w-[1200px] w-full h-full mx-auto rounded-lg bg-white px-16 py-15 bg-center "> */}
+                {/* <div className='bg-white p-6 rounded-lg shadow-lg w-[1127px] max-w-4xl'> */}
+                <div className='bg-white bg-opacity-90 backdrop-blur-md p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto mt-10 '>
                     <div className="flex flex-col gap-2">
-                        <h1 className='text-2xl font-blod mb-6 text-blue-600 dark:text-sky-400'>
-                            รายละเอียดการจอง
+                        <h1 className='text-2xl py-3 px-5 bg-gray-900 text-white text-center font-bold uppercase'>
+                            Room Booking
                         </h1>
-                        <ReservationDetails />
                     </div>
+                    <TextStatusInput />
 
+                    <AdditionalDetails />
 
-                    <div className=" flex flex-row-reverse gap-2">
-                        <div className='mb-4 flex-1'>
+                {/* <div className="z - 5 bg-black opacity-40 w-[200px] h-[200px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white ${modal ? ' block' : ' hidden'}">
+                    <div>
+                        สำเร็จ!
+                    </div>
+                </div> */}
+
+                {/* <div className='flex ml-auto gap-10 justify-between'> */}
+                <div className='grid grid-cols-2 mt-4 items-center justify-center pb-1'>
+                    <div className='flex items-center justify-center'>
+                        <CalendarFrom />
+                    </div>
+                    <div className=" flex flex-row">
+                        <div className='mb-4 flex-1 '>
+                            <DateTimeInput />
                             <label htmlFor="details-input" className='block text-gray-700'>
-                                รายละเอียด:
+                                Details:
                             </label>
                             <textarea
                                 name="details-input"
                                 value={form.details}
                                 onChange={onDetailsChangeHandler}
-                                className="w-full p-2 border border-gray-300 rounded-lg shadow-md"
+                                className="w-full p-19 border border-gray-300 rounded-lg shadow-md text-[#6B7280]"
                             ></textarea>
-                            < AdditionalDetails />
                         </div>
                     </div >
-
-                    <div className="flex ">
-                        <RecurringBooking />
-                        <div div className="flex flex-row-reverse gap-2" >
-                            <div className='mb-4 flex-1'>
-                                <label className='block text-gray-700'>สิ้นสุดวันที่: </label>
-                                <input
-                                    type="date"
-                                    name="endDate"
-                                    value={form.endDate}
-                                    onChange={onEndDateChangeHandler}
-                                    className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
-                                />
-                            </div>
-                        </div >
-                    </div>
-
-                    <div className='flex flex-row-reverse gap-5 '>
-                        <ResetButton />
-                        <SubmitButton />
-                    </div>
                 </div>
-            </div >
+
+                <div className='flex flex-row-reverse gap-6 '>
+                    <SubmitButton />
+                    <ResetButton />
+                </div>
+            </div>
+        </div >
         </>
 
     )

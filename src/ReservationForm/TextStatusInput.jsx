@@ -5,15 +5,9 @@ const TextStatusInput = ({ }) => {
     const [] = useState({ name: "", status: "" })
     const { setForm, form } = useReversation()
     const onNameChangeHandler = (event) => {
-        // setState({ ...state, 
-        //     name: event.target.value 
-        // })
         setForm((prev) => ({ ...prev, name: event.target.value }))
     }
     const onStatusChangeHandler = (event) => {
-        // setState({ ...state,
-        //     status: event.target.value
-        // });
         setForm((prev) => ({ ...prev, status: event.target.value }))
     }
 
@@ -23,9 +17,9 @@ const TextStatusInput = ({ }) => {
 
     return (
         
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-2 pt-3">
             <div className="mb-4 flex-1">
-                <label htmlFor="name-input" className='block text-gray-700'>
+                <label htmlFor="name-input" className='block text-gray-700 '>
                     Name:
                 </label>
                 <input
@@ -33,7 +27,8 @@ const TextStatusInput = ({ }) => {
                     name='name-input'
                     value={form.name}
                     onChange={onNameChangeHandler}
-                    className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                    placeholder="Enter your name"
+                    className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-300 font-medium text-base text-[#6B7280]"
                 />
             </div>
 
@@ -45,9 +40,9 @@ const TextStatusInput = ({ }) => {
                     name="status"
                     value={form.status}
                     onChange={onStatusChangeHandler}
-                    className="w-full p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                    className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-300 font-medium text-base text-[#6B7280]"
                 >
-                    <option value="">--Choose your role--</option>
+                    <option value="" className="font-semiblod text-gray-500">Please Select</option>
                     <option value="Students">Students</option>
                     <option value="Staff">Staff</option>
                     <option value="Lecturer">Lecturer</option>

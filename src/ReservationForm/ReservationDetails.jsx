@@ -8,13 +8,9 @@ const ReservationDetails = () => {
     const onTextStatusChange = (data) => {
         console.log(data)
     }
-    const onDateTimeChange = (data) => {
-        console.log(data)
-    }
     return (
         <div>
             <TextStatusInput onChange={onTextStatusChange}/>
-            <DateTimeInput onChange={onDateTimeChange}/>
         </div>
     )
 }
