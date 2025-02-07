@@ -38,7 +38,7 @@ const rooms = {
 function HomePage() {
   const homeNavigate = useNavigate();
   const handleRoomBoxSelected = () => {
-    homeNavigate("/form");
+    homeNavigate("/schdule");
     window.scrollTo({ top: 0 });
   };
 
