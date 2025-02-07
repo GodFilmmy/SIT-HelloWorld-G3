@@ -12,6 +12,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <TopNavBar/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/form" element={<ReservationForm />} />
