@@ -2,7 +2,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { CiMail } from "react-icons/ci";
 
-const tel = " 0 2470 9820";
+const tel = " 0 2470 98200";
 const email = " servicedesk@sit.kmutt.ac.th";
 
 function Footer() {
