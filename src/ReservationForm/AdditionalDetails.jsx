@@ -25,7 +25,7 @@ const AdditionalDetails = ({ onChange }) => {
         "Meeting 3/4(3rd Floor)", "Meeting 4/2(Classroom)", "Meeting 4/3(4th Floor)"]
     const floorCB2 = ["3rd"]
     const floorLx = ["10th", "11th", "12th"];
-    const floorSIT = ["1st", "3rd", "4th"]
+    const floorSIT = ["1st", "3rd", "4th"];
 
     // useEffect(() => {
     //     if ()
@@ -49,8 +49,8 @@ const AdditionalDetails = ({ onChange }) => {
                             // onChange={onFloorChangeHandler}
                             className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-200 font-medium text-base text-[#6B7280]"
                         >
+                            <option value="" className="font-semibold text-slate-200">Please Select</option>
                             <optgroup label="CB2 Building">
-                                <option value="" className="font-semibold text-slate-200">Please Select</option>
                                 {floorCB2.map((value) => {
                                     return (
                                         <option key={value} value={value}>{value}</option>
