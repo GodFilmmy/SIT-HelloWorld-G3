@@ -45,7 +45,7 @@ const ReservationForm = () => {
         {/* <div className='bg-white p-6 rounded-lg shadow-lg w-[1127px] max-w-4xl'> */}
         <div className="form-box-container bg-white bg-opacity-90 backdrop-blur-md p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto mt-10 ">
           <div className="flex flex-col gap-2">
-            <h1 className="from-header text-2xl py-3 px-5 bg-gray-900 text-white text-center font-bold uppercase">
+            <h1 className="from-header text-2xl py-3 px-5 bg-[#2165BE] text-white text-center font-bold uppercase">
               Room Booking
             </h1>
           </div>

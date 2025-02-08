@@ -6,6 +6,7 @@ import Footer from "./Footer/Footer";
 import TopNavBar from "./NavBar/Nav";
 import ScheduleResult from "./SchedulePage/Schedulepage";
 import { ReversationProvider } from "./contexts/useReversation";
+// import BookingSuccess from "./ReservationForm/BookingSucces";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path="/schdule" element={<ScheduleResult />} />
+          {/* <Route path="/book" element={<BookingSuccess/>} /> */}
           <Route
             path="/form"
             element={

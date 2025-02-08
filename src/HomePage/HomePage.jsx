@@ -57,6 +57,7 @@ function HomePage() {
           <div className="home-title">
             <div className="text-6xl font-bold">
               ระบบจองห้อง <br></br>คณะเทคโนโลยีสารสนเทศ
+              {/* SIT ROOM<br></br>BOOKING */}
             </div>
           </div>
           <div className="home-room-dropdown ">
