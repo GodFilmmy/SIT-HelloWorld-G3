@@ -8,9 +8,11 @@ import ResetButton from "./Button/ResetButton";
 import CalendarFrom from "./CalendarForm";
 import TextStatusInput from "./TextStatusInput";
 import DateTimeInput from "./DateTImeInput";
+import BookingSuccess from "./BookingSucces";
 // import RecurringBooking from './RecurringBooking';
 
 const ReservationForm = () => {
+  const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     status: "",
@@ -55,7 +57,7 @@ const ReservationForm = () => {
 
           {/* <div className="z - 5 bg-black opacity-40 w-[200px] h-[200px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white ${modal ? ' block' : ' hidden'}">
                     <div>
-                        สำเร็จ!
+                        สำเร็จ!...
                     </div>
                 </div> */}
 
@@ -81,11 +83,12 @@ const ReservationForm = () => {
           </div>
 
           <div className="flex flex-row-reverse gap-6 ">
-            <SubmitButton />
+            <SubmitButton setModal={setModal} />
             <ResetButton />
           </div>
         </div>
       </div>
+      <BookingSuccess modal={modal} setModal={setModal} />
     </>
   );
 };
