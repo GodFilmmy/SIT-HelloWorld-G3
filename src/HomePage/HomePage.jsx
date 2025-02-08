@@ -2,6 +2,11 @@ import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import { useState } from "react";
 import "react-calendar/dist/Calendar.css";
+
+const floorCB2 = ["3rd"]
+const floorLx = ["10th", "11th", "12th"];
+const floorSIT = ["1st", "3rd", "4th"];
+
 const rooms = {
   room1: {
     building: "LX",
@@ -65,15 +70,20 @@ function HomePage() {
               className="w-[50%] p-3 border border-[#6DA0FE] rounded-lg"
             >
               <option value="">--choose your floor--</option>
-              <optgroup label="Lx Building">
-                <option value="LxBuilding">10th</option>
-                <option value="LxBuilding">11th</option>
-                <option value="LxBuilding">12th</option>
+              <optgroup label="CB2 Building">
+                {floorCB2.map((value)=>{
+                  return <option key={value} value={value}>{value}</option>
+                })}
+              </optgroup>
+              <optgroup label="LX Building">
+              {floorLx.map((value)=>{
+                  return <option key={value} value={value}>{value}</option>
+                })}
               </optgroup>
               <optgroup label="SIT Building">
-                <option value="SITBuilding">1st</option>
-                <option value="SITBuilding">3rd</option>
-                <option value="SITBuilding">4th</option>
+              {floorSIT.map((value)=>{
+                  return <option key={value} value={value}>{value}</option>
+                })}
               </optgroup>
             </select>
           </div>
@@ -106,7 +116,7 @@ function HomePage() {
             </div>
           </div>
           <div className="home-room-calen items-center flex justify-center mt-4">
-            <Calendar onChange={setValue} value={value}/>
+            {/* <Calendar onChange={setValue} value={value}/>*/}
           </div>
         </div>
       </div>
