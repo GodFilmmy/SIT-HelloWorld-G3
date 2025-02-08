@@ -1,16 +1,44 @@
 import React, { useEffect, useState } from "react";
 // import TextStatusInput from './TextStatusInput';
 import { useReversation } from "../contexts/useReversation";
-import ReservationDetails from "./ReservationDetails";
-import AdditionalDetails from "./AdditionalDetails";
-import SubmitButton from "./Button/SubmitButton";
-import ResetButton from "./Button/ResetButton";
-import CalendarFrom from "./CalendarForm";
-import TextStatusInput from "./TextStatusInput";
-import DateTimeInput from "./DateTImeInput";
+import ReservationDetails from "../ReservationForm/ReservationDetails";
+import AdditionalDetails from "../ReservationForm/AdditionalDetails";
+import SubmitButton from "../ReservationForm/Button/SubmitButton";
+import ResetButton from "../ReservationForm/Button/ResetButton";
+import CalendarFrom from "../ReservationForm/CalendarForm";
+import TextStatusInput from "../ReservationForm/TextStatusInput";
+import DateTimeInput from "../ReservationForm/DateTImeInput";
+import BookingSuccess from "../ReservationForm/BookingSucces";
+import BookingFail from "../ReservationForm/BookingFail";
 // import RecurringBooking from './RecurringBooking';
 
 const ReservationForm = () => {
+  const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError]= useState(null);
+  const { form, setForm } = useReversation();
+
+  useEffect(() => {
+    const fetchReservation = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch("http://helloworld03.sit.kmutt.ac.th:3000/api/buildings/getFloor");
+        if(!response.ok) {
+          throw new Error("Failed to fetch reservations");
+        }
+        const data = await response.json();
+        setForm(data); // Assuming the API returns the latest reservation details
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReservation();
+  }, [setForm]);
+
+
   const [formData, setFormData] = useState({
     name: "",
     status: "",
@@ -21,19 +49,7 @@ const ReservationForm = () => {
     endTime: "",
     details: "",
   });
-  const { form, setForm } = useReversation();
-  // const handleSummit = () => {
-  //     event.preventDefault();
-  //     setForm(formData)
-  //     console.log("✅ Form Submitted:", formData);
-  // }
-  // useEffect(() => {
-  //     console.log("📌 From Data Update: ", formData);
-  // }, [fromData]);
 
-  // const onEndDateChangeHandler = (event) => {
-  //     setForm((prev) => ({ ...prev, endDate: event.target.value }))
-  // }
   const onDetailsChangeHandler = (event) => {
     setForm((prev) => ({ ...prev, details: event.target.value }));
   };
@@ -41,8 +57,6 @@ const ReservationForm = () => {
   return (
     <>
       <div className="form-page-container flex flex-col pt-20 justify-center bg-[url(Form-img/form-background.png)] items-center bg-center bg-cover bg-no-repeat p-5">
-        {/* <div className="max-w-[1200px] w-full h-full mx-auto rounded-lg bg-white px-16 py-15 bg-center "> */}
-        {/* <div className='bg-white p-6 rounded-lg shadow-lg w-[1127px] max-w-4xl'> */}
         <div className="form-box-container bg-white bg-opacity-90 backdrop-blur-md p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto mt-10 ">
           <div className="flex flex-col gap-2">
             <h1 className="from-header text-2xl py-3 px-5 bg-[#2165BE] text-white text-center font-bold uppercase">
@@ -53,11 +67,6 @@ const ReservationForm = () => {
 
           <AdditionalDetails />
 
-          {/* <div className="z - 5 bg-black opacity-40 w-[200px] h-[200px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white ${modal ? ' block' : ' hidden'}">
-                    <div>
-                        สำเร็จ!
-                    </div>
-                </div> */}
 
           {/* <div className='flex ml-auto gap-10 justify-between'> */}
           <div className="form-time-detail grid grid-cols-2 mt-4 items-center justify-center pb-1">
@@ -81,11 +90,13 @@ const ReservationForm = () => {
           </div>
 
           <div className="flex flex-row-reverse gap-6 ">
-            <SubmitButton />
+            <SubmitButton setModal={setModal} />
             <ResetButton />
           </div>
         </div>
       </div>
+      <BookingSuccess modal={modal} setModal={setModal} />
+      <BookingFail modal={modal} setModal={setModal} />
     </>
   );
 };

@@ -28,9 +28,9 @@ export const ReversationProvider = ({ children }) => {
     })
     const [value, setValue] = useState(1)
 
-    useEffect(() => {
-        console.log(form)
-    }, [form])
+    // useEffect(() => {
+    //     console.log(form)
+    // }, [form])
 
     return <Context.Provider value={{ form, setForm, value, setValue }} >{children}</Context.Provider>
 }

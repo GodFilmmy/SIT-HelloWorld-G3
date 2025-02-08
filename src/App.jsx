@@ -1,6 +1,6 @@
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
-import ReservationForm from "./ReservationForm/ReservationForm";
+import Page from "./Main/Page";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import TopNavBar from "./NavBar/Nav";
@@ -20,7 +20,7 @@ function App() {
             path="/form"
             element={
               <ReversationProvider>
-                <ReservationForm />
+                <Page/>
               </ReversationProvider>
             }
           />
