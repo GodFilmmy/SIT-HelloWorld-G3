@@ -1,15 +1,30 @@
-import { Button, Flex } from 'antd';
-import { useEffect } from 'react';
+import { Button, Flex, Spin } from 'antd'; // Added Spin for loading indicator
+import { useState, useEffect } from 'react';
 import { useReversation } from '../../contexts/useReversation';
 
 const SubmitButton = ({ setModal }) => {
   const { form, setForm } = useReversation();
+  const [loading, setLoading] = useState(false); // Track loading state
+  const [error, setError] = useState(null); // Track error state
 
   useEffect(() => {
-    console.log("Form Data:", form);
+    console.log('Form Data:', form); // Log form data for debugging
   }, [form]);
 
+  // Validate form fields
+  const validateForm = () => {
+    if (!form.room || !form.date || !form.startTime || !form.endTime) {
+      setError('Please fill in all required fields.');
+      return false;
+    }
+    return true;
+  };
+
   const onSubmitHandler = async () => {
+    if (!validateForm()) return; // Stop submission if validation fails
+
+    setLoading(true); // Set loading state to true
+
     try {
       const response = await fetch('http://helloworld03.sit.kmutt.ac.th:3000/api/bookings/createBooking', {
         method: 'POST',
@@ -17,10 +32,10 @@ const SubmitButton = ({ setModal }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          room_id: form.room_id,  // dynamically use room_id from form
-          user_id: 456,  // You can replace this with the actual user ID if needed
-          date: form.date, 
-          time: `${form.startTime}-${form.endTime}` // Format time as required
+          room: form.room, // Use form.room
+          user_id: 456, // Replace with actual user ID if needed
+          date: form.date,
+          time: `${form.startTime}-${form.endTime}`, // Format time properly
         }),
       });
 
@@ -31,30 +46,33 @@ const SubmitButton = ({ setModal }) => {
       const data = await response.json();
       console.log('Booking Success:', data);
 
-      // After successful booking, update the modal state to show the success modal
+      // Show success modal on successful booking
       setModal(true);
 
-      // Optionally: Update the calendar with the new event data
-      // You can update a global state or pass the new event to the calendar component
-      // For example, storing the new event in the global state and passing it to the Calendar
+      // Optionally reset the form or perform other actions
 
-      // Example:
-      // events.push({
-      //   title: 'Room Booking',
-      //   start: new Date(form.date + " " + form.startTime),
-      //   end: new Date(form.date + " " + form.endTime),
-      // });
     } catch (error) {
       console.error('Error:', error);
+      setError('Booking failed. Please try again.'); // Show error message
+    } finally {
+      setLoading(false); // Set loading state to false after request
     }
   };
 
   return (
     <>
+      {/* Show loading spinner if the form is being submitted */}
       <Flex gap="small" wrap>
-        <Button size="large" type="primary" onClick={onSubmitHandler}>
-          Submit
-        </Button>
+        {loading ? (
+          <Spin size="large" /> // Show a spinning loader when loading
+        ) : (
+          <>
+            <Button size="large" type="primary" onClick={onSubmitHandler}>
+              Submit
+            </Button>
+            {error && <div className="error-message">{error}</div>} {/* Show error message if present */}
+          </>
+        )}
       </Flex>
     </>
   );

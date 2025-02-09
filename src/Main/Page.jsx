@@ -5,8 +5,9 @@ import DateTimeInput from "../ReservationForm/DateTImeInput";
 import SubmitButton from "../ReservationForm/Button/SubmitButton";
 import ResetButton from "../ReservationForm/Button/ResetButton";
 import CalendarFrom from "../ReservationForm/CalendarForm";
-import BookingFail from "../ReservationForm/BookingFail";
 import BookingSuccess from "../ReservationForm/BookingSucces";
+import BookingFail from "../ReservationForm/BookingFail";
+import { useReversation } from "../contexts/useReversation";
 
 const ReservationForm = () => {
   const location = useLocation();
@@ -14,23 +15,23 @@ const ReservationForm = () => {
   const roomName = queryParams.get("room");
   const floor = queryParams.get("floor");
 
+  const { form, setForm } = useReversation();
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    status: "",
-    floor: floor || "",
-    room: roomName || "",
-    date: "",
-    startTime: "",
-    endTime: "",
-    details: "",
-  });
 
   const onDetailsChangeHandler = (event) => {
-    setFormData((prev) => ({ ...prev, details: event.target.value }));
+    setForm((prev) => ({ ...prev, details: event.target.value }));
   };
+
+  useEffect(() => {
+    setForm(prev => ({
+      ...prev,
+      room: roomName,
+      floor: floor,
+    }));
+  }, [roomName, floor, setForm]);  // This ensures the form gets updated when the roomName or floor changes
+  
 
   return (
     <div className="form-page-container flex flex-col pt-20 justify-center bg-[url(Form-img/form-background.png)] items-center bg-center bg-cover bg-no-repeat p-5">
@@ -53,7 +54,7 @@ const ReservationForm = () => {
               </label>
               <textarea
                 name="details-input"
-                value={formData.details}
+                value={form.details} // Use form.details here
                 onChange={onDetailsChangeHandler}
                 className="w-full p-19 border border-gray-300 rounded-lg shadow-md text-[#6B7280]"
               ></textarea>
