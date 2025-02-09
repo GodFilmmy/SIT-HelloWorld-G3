@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
-// import TextStatusInput from './TextStatusInput';
 import { useReversation } from "../contexts/useReversation";
-import ReservationDetails from "../ReservationForm/ReservationDetails";
-import AdditionalDetails from "../ReservationForm/AdditionalDetails";
+import TextStatusInput from "../ReservationForm/TextStatusInput";
+import DateTimeInput from "../ReservationForm/DateTImeInput";
 import SubmitButton from "../ReservationForm/Button/SubmitButton";
 import ResetButton from "../ReservationForm/Button/ResetButton";
 import CalendarFrom from "../ReservationForm/CalendarForm";
-import TextStatusInput from "../ReservationForm/TextStatusInput";
-import DateTimeInput from "../ReservationForm/DateTImeInput";
 import BookingSuccess from "../ReservationForm/BookingSucces";
 import BookingFail from "../ReservationForm/BookingFail";
 import { useLocation } from "react-router-dom";
-// import RecurringBooking from './RecurringBooking';
 
 const ReservationForm = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const roomName = queryParams.get("room");
+  const floor = queryParams.get("floor");
+
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError]= useState(null);
+  const [error, setError] = useState(null);
   const { form, setForm } = useReversation();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const ReservationForm = () => {
       setLoading(true);
       try {
         const response = await fetch("http://helloworld03.sit.kmutt.ac.th:3000/api/buildings/getFloor");
-        if(!response.ok) {
+        if (!response.ok) {
           throw new Error("Failed to fetch reservations");
         }
         const data = await response.json();
@@ -39,12 +40,12 @@ const ReservationForm = () => {
     fetchReservation();
   }, [setForm]);
 
-
+  // Ensure room and floor are set from the URL
   const [formData, setFormData] = useState({
     name: "",
     status: "",
-    floor: form.floor,
-    room: form.room,
+    floor: floor || "",  // Set default value for floor if not available
+    room: roomName || "", // Set default value for room if not available
     date: "",
     startTime: "",
     endTime: "",
@@ -64,19 +65,20 @@ const ReservationForm = () => {
               Room Booking
             </h1>
           </div>
+
+          {/* TextStatusInput stays fixed */}
           <TextStatusInput />
 
-          {/* <AdditionalDetails room={roomParam}/>*/}
-
-
-          {/* <div className='flex ml-auto gap-10 justify-between'> */}
           <div className="form-time-detail grid grid-cols-2 mt-4 items-center justify-center pb-1">
             <div className="flex items-center justify-center">
+              {/* Keep CalendarFrom fixed */}
               <CalendarFrom />
             </div>
             <div className=" flex flex-row">
               <div className="mb-4 flex-1 ">
+                {/* Keep DateTimeInput fixed */}
                 <DateTimeInput />
+                
                 <label htmlFor="details-input" className="block text-gray-700">
                   Details:
                 </label>
@@ -90,15 +92,19 @@ const ReservationForm = () => {
             </div>
           </div>
 
-          <div className="flex flex-row-reverse gap-6 ">
+          <div className="flex flex-row-reverse gap-6">
+            {/* Keep Submit and Reset Buttons fixed */}
             <SubmitButton setModal={setModal} />
             <ResetButton />
           </div>
         </div>
       </div>
+
+      {/* Booking Success and Fail modals stay fixed */}
       <BookingSuccess modal={modal} setModal={setModal} />
       <BookingFail modal={modal} setModal={setModal} />
     </>
   );
 };
+
 export default ReservationForm;

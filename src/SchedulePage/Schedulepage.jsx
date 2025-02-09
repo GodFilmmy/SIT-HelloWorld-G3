@@ -12,15 +12,15 @@ const events = [
 ];
 
 function ScheduleResult() {
-  const location = useLocation(); // Get the current location (URL)
-  const queryParams = new URLSearchParams(location.search); // Get the query parameters
+  const location = useLocation(); 
+  const queryParams = new URLSearchParams(location.search); 
   const roomName = queryParams.get("room");
   const floor = queryParams.get("floor");
 
   const [roomDetails, setRoomDetails] = useState({
     roomName: roomName || "Default Room",
     floor: floor || "Default Floor",
-    building: "LX Building", // You can hard-code the building if needed or pass as a query parameter
+    building: "LX Building",
   });
 
   useEffect(() => {
