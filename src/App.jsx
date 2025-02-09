@@ -13,8 +13,12 @@ function App() {
       <BrowserRouter>
         <TopNavBar />
         <Routes>
-          <Route path="/" element={<HomePage/>} />
-          <Route path="/schdule" element={<ScheduleResult />} />
+          <Route path="/" element={
+            <ReversationProvider>
+              <HomePage/>
+            </ReversationProvider>
+          } />
+          <Route path="/schdule" element={<ReversationProvider><ScheduleResult /></ReversationProvider>} />
           {/* <Route path="/book" element={<BookingSuccess/>} /> */}
           <Route
             path="/form"

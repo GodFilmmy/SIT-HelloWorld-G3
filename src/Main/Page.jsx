@@ -10,6 +10,7 @@ import TextStatusInput from "../ReservationForm/TextStatusInput";
 import DateTimeInput from "../ReservationForm/DateTImeInput";
 import BookingSuccess from "../ReservationForm/BookingSucces";
 import BookingFail from "../ReservationForm/BookingFail";
+import { useLocation } from "react-router-dom";
 // import RecurringBooking from './RecurringBooking';
 
 const ReservationForm = () => {
@@ -27,7 +28,7 @@ const ReservationForm = () => {
           throw new Error("Failed to fetch reservations");
         }
         const data = await response.json();
-        setForm(data); // Assuming the API returns the latest reservation details
+        setForm(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -42,8 +43,8 @@ const ReservationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     status: "",
-    floor: "",
-    room: "",
+    floor: form.floor,
+    room: form.room,
     date: "",
     startTime: "",
     endTime: "",
@@ -65,7 +66,7 @@ const ReservationForm = () => {
           </div>
           <TextStatusInput />
 
-          <AdditionalDetails />
+          <AdditionalDetails room={roomParam}/>
 
 
           {/* <div className='flex ml-auto gap-10 justify-between'> */}

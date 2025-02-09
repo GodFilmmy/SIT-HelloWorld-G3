@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+
 function ReservationBtn() {
+
   const navigate = useNavigate();
   const handleFormBtn = () => {
-    navigate("/form");
+    navigate(`/form`);
     window.scrollTo({ top: 0 });
   };
   return (

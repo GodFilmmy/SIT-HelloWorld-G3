@@ -2,7 +2,10 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import ReservationBtn from "../Reservation-Btn";
+import { useEffect } from "react";
+import { useReversation } from "../contexts/useReversation";
 const localizer = momentLocalizer(moment);
+
 
 const events = [
   {
@@ -18,6 +21,13 @@ const events = [
 ];
 
 function ScheduleResult() {
+
+  const {form, setForm} = useReversation()
+
+  useEffect(() => {
+    console.log(form)
+  }, [])
+
   return (
     <>
       <div className="schedule-Container flex flex-col p-3 gap-4 lg:flex-row mt-30 ">
