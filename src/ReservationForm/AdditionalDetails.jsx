@@ -9,7 +9,7 @@ function groupRoomsByFloor(data) {
         acc[item.name_floor].push(item.room);
         return acc;
     }, {});
-  }
+}
 
 const fetchBuildingData = async () => {
     const res = await fetch('http://helloworld03.sit.kmutt.ac.th:3000/api/buildings/getDetails')
@@ -17,7 +17,7 @@ const fetchBuildingData = async () => {
     const formattedData = groupRoomsByFloor(data)
     console.log(formattedData)
     return formattedData
-  }
+}
 
 const AdditionalDetails = ({ onChange, room }) => {
     const { form, setForm } = useReversation()
@@ -27,7 +27,7 @@ const AdditionalDetails = ({ onChange, room }) => {
     useEffect(() => {
         // Set new data after selected building had changed
         fetchBuildingData().then(data => setBuildingData(data))
-      }, [])
+    }, [])
     // const onDetailsChangeHandler = (event) => {
     //     setForm((prev) => ({ ...prev, details: event.target.value, }))
     // }

@@ -1,10 +1,10 @@
-import { Button, Flex, Spin } from 'antd'; // Added Spin for loading indicator
+import { Button, Flex, Spin } from 'antd'; 
 import { useState, useEffect } from 'react';
 import { useReversation } from '../../contexts/useReversation';
 
-const SubmitButton = ({ setModal }) => {
+const SubmitButton = ({ setModal, setModal2 }) => {
   const { form, setForm } = useReversation();
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [loading, setLoading] = useState(false); 
   const [error, setError] = useState(null); // Track error state
 
   useEffect(() => {
@@ -32,13 +32,18 @@ const SubmitButton = ({ setModal }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          room: form.room, // Include room from form
-          floor: form.floor, // Include floor from form
-          user_id: 456, // Replace with actual user ID if needed
-          date: form.date,
-          time: `${form.startTime}-${form.endTime}`, // Format time properly
+          room: form.room, 
+          floor: form.floor, 
+          Building_ID:"221",
+          username:"asd",
+          user_role: form.status, 
+          start_booking_date: form.date,
+          start_time: form.startTime,
+          end_time: form.endTime,
+          description: "test"
         }),
       });
+      console.log(response);
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -48,9 +53,10 @@ const SubmitButton = ({ setModal }) => {
       console.log('Booking Success:', data);
 
       setModal(true); // Show modal on success
-
+      setModal2(false)
     } catch (error) {
       console.error('Error:', error);
+      setStatus("fail");
       setError('Booking failed. Please try again.'); // Show error message
     } finally {
       setLoading(false); // Set loading state to false after request

@@ -17,6 +17,7 @@ const ReservationForm = () => {
 
   const { form, setForm } = useReversation();
   const [modal, setModal] = useState(false);
+  const [modal2, setModal2] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -63,13 +64,12 @@ const ReservationForm = () => {
         </div>
 
         <div className="flex flex-row-reverse gap-6">
-          <SubmitButton setModal={setModal} />
+          <SubmitButton setModal={setModal} setModal2={setModal2} />
           <ResetButton />
         </div>
       </div>
-      
-      <BookingSuccess modal={modal} setModal={setModal} />
-      <BookingFail modal={modal} setModal={setModal} />
+      <BookingSuccess modal={modal} setModal={setModal}/>
+      <BookingFail modal={modal2} setModal={setModal2}/>
     </div>
   );
 };

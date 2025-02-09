@@ -16,23 +16,28 @@ function groupRoomsByFloor(data) {
   }, {});
 }
 
-const fetchBuildingData = async () => {
-  const res = await fetch('http://helloworld03.sit.kmutt.ac.th:3000/api/buildings/getDetails')
-  const data = await res.json()
-  const formattedData = groupRoomsByFloor(data)
-  console.log(formattedData)
-  return formattedData
-}
 
 function HomePage() {
   const homeNavigate = useNavigate();
   const {form, setForm} = useReversation()
   const [selectedFloor, setSelectedFloor] = useState(null)
   const [buildingData, setBuildingData] = useState({})
+  const [id, setId] = useState(null);
+  const [building, setBulding] = useState();
   
+  console.log(form)
+  
+  const fetchBuildingData = async () => {
+    const res = await fetch('http://helloworld03.sit.kmutt.ac.th:3000/api/buildings/getDetails')
+    const data = await res.json()
+    const formattedData = groupRoomsByFloor(data)
+    setBulding(data)
+    return formattedData
+  }
   const handleRoomBoxSelected = (roomName) => {
     setForm({...form, room: roomName, floor: selectedFloor})
-    homeNavigate(`/schedule?room=${roomName}&floor=${selectedFloor}`);
+    const id = building.filter(item => item.name_floor == selectedFloor && item.room == roomName);
+    homeNavigate(`/schedule?room=${roomName}&floor=${selectedFloor}&id=${id[0].ID}`);
     window.scrollTo({ top: 0 });
   };
 

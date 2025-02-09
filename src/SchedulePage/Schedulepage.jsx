@@ -7,25 +7,54 @@ import ReservationBtn from "../Reservation-Btn";
 
 const localizer = momentLocalizer(moment);
 
-// Sample events to display on the calendar (this should be dynamically updated)
-const events = [
-  // { title: 'Room Booking', start: new Date(), end: new Date() },
-];
+
+// const events = [
+//   { title: 'Room Booking', start: new Date(), end: new Date() },
+// ];
 
 function ScheduleResult() {
-  const location = useLocation(); 
-  const queryParams = new URLSearchParams(location.search); 
+  const location = useLocation();
+  const [events, setEvents] = useState([]);
+  const queryParams = new URLSearchParams(location.search);
   const roomName = queryParams.get("room");
   const floor = queryParams.get("floor");
+  const id = queryParams.get("id");
 
   const [roomDetails, setRoomDetails] = useState({
     roomName: roomName || "Default Room",
     floor: floor || "Default Floor",
   });
 
+  const fetchRoomData = async () => {
+    const res = await fetch(`http://helloworld03.sit.kmutt.ac.th:3000/api/bookings/getRoomSchedule/${id}`)
+    const data = await res.json()
+    console.log(data)
+    const newEvents = data.map(event => {
+      const startDate = new Date(event.start_booking_date).toISOString().split('T')[0];
+      const endDate = new Date(event.start_booking_date).toISOString().split('T')[0];
+  
+      const startDateTime = new Date(`${startDate}T${event.start_time}`);
+      const endDateTime = new Date(`${endDate}T${event.end_time}`);
+    
+      return {
+        title: event.description,
+        start: startDateTime.toISOString(),
+        end: endDateTime.toISOString(),
+      };
+    });
+    
+
+    setEvents(prevEvents => [
+      ...newEvents,
+    ]);
+  }
+
   useEffect(() => {
-    console.log("Room Details:", roomDetails);
+    fetchRoomData()
+    // console.log("Room Details:", roomDetails);
   }, [roomDetails]);
+
+  console.log(events)
 
   return (
     <div className="schedule-Container flex flex-col p-3 gap-4 lg:flex-row mt-30 ">
