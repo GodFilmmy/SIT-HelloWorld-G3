@@ -66,7 +66,7 @@ const ReservationForm = () => {
           </div>
           <TextStatusInput />
 
-          <AdditionalDetails room={roomParam}/>
+          {/* <AdditionalDetails room={roomParam}/>*/}
 
 
           {/* <div className='flex ml-auto gap-10 justify-between'> */}
