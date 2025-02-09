@@ -18,7 +18,7 @@ function App() {
               <HomePage/>
             </ReversationProvider>
           } />
-          <Route path="/schdule" element={<ReversationProvider><ScheduleResult /></ReversationProvider>} />
+          <Route path="/schedule" element={<ReversationProvider><ScheduleResult /></ReversationProvider>} />
           {/* <Route path="/book" element={<BookingSuccess/>} /> */}
           <Route
             path="/form"

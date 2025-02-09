@@ -6,39 +6,6 @@ import { useReversation } from "../contexts/useReversation";
 import { FormContext } from "antd/es/form/context";
 
 
-const rooms = {
-  room1: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/1",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room2: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/2",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room3: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/3",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room4: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/2",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room5: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/2",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-};
-
 function groupRoomsByFloor(data) {
   return data.reduce((acc, item) => {
       if (!acc[item.name_floor]) {
@@ -65,7 +32,7 @@ function HomePage() {
   
   const handleRoomBoxSelected = (roomName) => {
     setForm({...form, room: roomName, floor: selectedFloor})
-    homeNavigate(`/schdule`);
+    homeNavigate(`/schedule?room=${roomName}&floor=${selectedFloor}`);
     window.scrollTo({ top: 0 });
   };
 
