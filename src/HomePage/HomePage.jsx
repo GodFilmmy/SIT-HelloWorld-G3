@@ -1,51 +1,51 @@
 import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
+import { useReversation } from "../contexts/useReversation";
+import { FormContext } from "antd/es/form/context";
 
-const floorCB2 = ["3rd"]
-const floorLx = ["10th", "11th", "12th"];
-const floorSIT = ["1st", "3rd", "4th"];
 
-const rooms = {
-  room1: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/1",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room2: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/2",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room3: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/3",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room4: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/2",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-  room5: {
-    building: "LX",
-    floor: "(10th floor)",
-    roomName: "Training room 10/2",
-    roomPic: "Home-img/home-room-selectpic.png",
-  },
-};
+function groupRoomsByFloor(data) {
+  return data.reduce((acc, item) => {
+      if (!acc[item.name_floor]) {
+          acc[item.name_floor] = [];
+      }
+      acc[item.name_floor].push(item.room);
+      return acc;
+  }, {});
+}
+
 
 function HomePage() {
   const homeNavigate = useNavigate();
-  const handleRoomBoxSelected = () => {
-    homeNavigate("/schdule");
+  const {form, setForm} = useReversation()
+  const [selectedFloor, setSelectedFloor] = useState(null)
+  const [buildingData, setBuildingData] = useState({})
+  const [id, setId] = useState(null);
+  const [building, setBulding] = useState();
+  
+  console.log(form)
+  
+  const fetchBuildingData = async () => {
+    const res = await fetch('http://helloworld03.sit.kmutt.ac.th:3000/api/buildings/getDetails')
+    const data = await res.json()
+    const formattedData = groupRoomsByFloor(data)
+    setBulding(data)
+    return formattedData
+  }
+  const handleRoomBoxSelected = (roomName) => {
+    setForm({...form, room: roomName, floor: selectedFloor})
+    const id = building.filter(item => item.name_floor == selectedFloor && item.room == roomName);
+    homeNavigate(`/schedule?room=${roomName}&floor=${selectedFloor}&id=${id[0].ID}`);
     window.scrollTo({ top: 0 });
   };
+
+  useEffect(() => {
+    
+    // Set new data after selected building had changed
+    fetchBuildingData().then(data => setBuildingData(data))
+  }, [selectedFloor])
 
   const [value, setValue] = useState(new Date());
   return (
@@ -62,57 +62,49 @@ function HomePage() {
           <div className="home-title">
             <div className="text-6xl font-bold">
               ระบบจองห้อง <br></br>คณะเทคโนโลยีสารสนเทศ
+              {/* SIT ROOM<br></br>BOOKING */}
             </div>
           </div>
           <div className="home-room-dropdown ">
             <select
+              onChange={(e) => {
+                setSelectedFloor(e.target.value)
+              }}
               name="floor"
               className="w-[50%] p-3 border border-[#6DA0FE] rounded-lg"
             >
               <option value="">--choose your floor--</option>
-              <optgroup label="CB2 Building">
-                {floorCB2.map((value)=>{
-                  return <option key={value} value={value}>{value}</option>
-                })}
-              </optgroup>
-              <optgroup label="LX Building">
-              {floorLx.map((value)=>{
-                  return <option key={value} value={value}>{value}</option>
-                })}
-              </optgroup>
-              <optgroup label="SIT Building">
-              {floorSIT.map((value)=>{
-                  return <option key={value} value={value}>{value}</option>
-                })}
-              </optgroup>
+              {
+                Object.keys(buildingData).map((data, index) => {
+                  return <option key={index} value={data}>{data}</option>
+                })
+              }
             </select>
           </div>
           <div className="home-room-choosing-container h-100 overflow-hidden w-ful rounded-lg">
             <div className="home-room-choosing-body overflow-y-auto h-full">
-              {Object.keys(rooms).map((roomKey) => (
-                <div
-                  onClick={handleRoomBoxSelected}
-                  key={roomKey}
+              {buildingData[selectedFloor]?.map((data) => {
+                console.log(data)
+                return (
+                  <div
+                  onClick={() => handleRoomBoxSelected(data)}
+                  key={data}
                   className="home-room-choosing-box flex gap-4 text-2xl p-8 mb-2 border border-gray-300 rounded-lg hover:border-2"
                 >
                   <div className="hoom-room-choosing-box-left">
                     <div className="home-room-building">
-                      <img src={rooms[roomKey].roomPic} />
+                      <img src={'/Home-img/home-room-selectpic.png'} />
                     </div>
                   </div>
                   <div className="hoom-room-choosing-box-right">
                     <div className="home-room-building font-bold">
-                      {rooms[roomKey].building}
-                    </div>
-                    <div className="home-room-floor">
-                      {rooms[roomKey].floor}
-                    </div>
-                    <div className="home-room-floor">
-                      {rooms[roomKey].roomName}
+                      {data}
                     </div>
                   </div>
                 </div>
-              ))}
+                )
+              })
+              }
             </div>
           </div>
           <div className="home-room-calen items-center flex justify-center mt-4">

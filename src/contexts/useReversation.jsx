@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const Context = createContext({
+const FormContext = createContext({
     name: "",
     status: "",
     date: "",
@@ -12,7 +12,7 @@ const Context = createContext({
 })
 
 export const useReversation = () => {
-    return useContext(Context)
+    return useContext(FormContext)
 }
 
 export const ReversationProvider = ({ children }) => {
@@ -26,11 +26,10 @@ export const ReversationProvider = ({ children }) => {
         floor: "",
         room: "",
     })
-    const [value, setValue] = useState(1)
 
-    useEffect(() => {
-        console.log(form)
-    }, [form])
+    // useEffect(() => {
+    //     console.log(form)
+    // }, [form])
 
-    return <Context.Provider value={{ form, setForm, value, setValue }} >{children}</Context.Provider>
+    return <FormContext.Provider value={{ form, setForm }} >{children}</FormContext.Provider>
 }

@@ -43,7 +43,7 @@ const TextStatusInput = ({ }) => {
                     className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-300 font-medium text-base text-[#6B7280]"
                 >
                     <option value="" className="font-semiblod text-gray-500">Please Select</option>
-                    <option value="Students">Students</option>
+                    <option value="Student">Students</option>
                     <option value="Staff">Staff</option>
                     <option value="Lecturer">Lecturer</option>
                 </select>

@@ -1,18 +1,36 @@
 import { useEffect, useState } from "react"
 import { useReversation } from "../contexts/useReversation"
 
-const AdditionalDetails = ({ onChange }) => {
-    const [fromData, setFormData] = useState({ details: "", floor: "", room: "" })
-    const { setForm, form } = useReversation()
+function groupRoomsByFloor(data) {
+    return data.reduce((acc, item) => {
+        if (!acc[item.name_floor]) {
+            acc[item.name_floor] = [];
+        }
+        acc[item.name_floor].push(item.room);
+        return acc;
+    }, {});
+}
+
+const fetchBuildingData = async () => {
+    const res = await fetch('http://helloworld03.sit.kmutt.ac.th:3000/api/buildings/getDetails')
+    const data = await res.json()
+    const formattedData = groupRoomsByFloor(data)
+    console.log(formattedData)
+    return formattedData
+}
+
+const AdditionalDetails = ({ onChange, room }) => {
+    const { form, setForm } = useReversation()
+    const [buildingData, setBuildingData] = useState({})
+    const [selectedFloor, setSelectedFloor] = useState(null)
+
+    useEffect(() => {
+        // Set new data after selected building had changed
+        fetchBuildingData().then(data => setBuildingData(data))
+    }, [])
     // const onDetailsChangeHandler = (event) => {
     //     setForm((prev) => ({ ...prev, details: event.target.value, }))
     // }
-    const onFloorChangeHandler = (event) => {
-        setForm((prev) => ({ ...prev, floor: event.target.value, }))
-    }
-    const onRoomChangeHandler = (event) => {
-        setForm((prev) => ({ ...prev, room: event.target.value }))
-    }
     const onDateChangeHandler = (event) => {
         setForm((prev) => ({ ...prev, date: event.target.value }))
     }
@@ -27,10 +45,9 @@ const AdditionalDetails = ({ onChange }) => {
     const floorLx = ["10th", "11th", "12th"];
     const floorSIT = ["1st", "3rd", "4th"];
 
-    // useEffect(() => {
-    //     if ()
-    // }
-    // )
+    useEffect(() => {
+        setSelectedFloor(form.floor)
+    }, [])
     return (
         <>
             <div className="grid-col gap-4">
@@ -44,33 +61,9 @@ const AdditionalDetails = ({ onChange }) => {
                         </label>
                         <select
                             name="floor"
-                            value={form.floor}
-                            onChange={onFloorChangeHandler}
-                            // onChange={onFloorChangeHandler}
                             className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-200 font-medium text-base text-[#6B7280]"
                         >
-                            <option value="" className="font-semibold text-slate-200">Please Select</option>
-                            <optgroup label="CB2 Building">
-                                {floorCB2.map((value) => {
-                                    return (
-                                        <option key={value} value={value}>{value}</option>
-                                    );
-                                })}
-                            </optgroup>
-                            <optgroup label="Lx Building">
-                                {floorLx.map((value) => {
-                                    return (
-                                        <option key={value} value={value}>{value}</option>
-                                    );
-                                })}
-                            </optgroup>
-                            <optgroup label="SIT Building">
-                                {floorSIT.map((value) => {
-                                    return (
-                                        <option key={value} value={value}>{value}</option>
-                                    );
-                                })}
-                            </optgroup>
+                            <option selected value={selectedFloor}>{selectedFloor}</option>
                         </select>
                         {/* </div> */}
                     </div>
@@ -80,7 +73,7 @@ const AdditionalDetails = ({ onChange }) => {
                             Room:
                         </label>
                         <select
-                            onChange={onRoomChangeHandler}
+
                             name="room"
                             value={form.room}
                             className="w-full p-4 rounded-md border border-gray-300 focus:shadow-md outline-none focus:ring-2 focus:ring-gray-300 font-medium text-base text-[#6B7280]"
