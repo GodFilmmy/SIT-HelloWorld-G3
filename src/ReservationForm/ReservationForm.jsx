@@ -9,6 +9,7 @@ import CalendarFrom from "./CalendarForm";
 import TextStatusInput from "./TextStatusInput";
 import DateTimeInput from "./DateTImeInput";
 import BookingSuccess from "./BookingSucces";
+import BookingFail from "./BookingFail";
 // import RecurringBooking from './RecurringBooking';
 
 const ReservationForm = () => {
