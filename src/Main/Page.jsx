@@ -30,7 +30,7 @@ const ReservationForm = () => {
       room: roomName,
       floor: floor,
     }));
-  }, [roomName, floor, setForm]);  // This ensures the form gets updated when the roomName or floor changes
+  }, [roomName, floor, setForm]); 
   
 
   return (
